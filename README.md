@@ -1,1 +1,4 @@
-# Working...
+# Food Order App
+The app lets users to add food items to cart from a list of food items. The list includes name, short description, and price of each food item. users can specify the amount through an input form. After that they can open the cart. The displays shows the total amount and a functionality to add or remove quantity. Finally the user can confirm order(which is not present at the moment) or close the cart.
+
+**It's a dummy project to practice intermidiate react features. The app state is managed using useReducer. The store is managed with useContext. Besides of that useRef, forwarRef, useEffect etc is used to achieve other functionalities.**
