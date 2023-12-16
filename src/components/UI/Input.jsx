@@ -1,14 +1,17 @@
+import { forwardRef } from "react";
+
 import classes from "./Input.module.css";
 import PropTypes from "prop-types";
 
-const Input = (props) => {
+const Input = forwardRef((props, ref) => {
   return (
     <div className={classes.input}>
       <label htmlFor={props.input.id}>{props.label}</label>
-      <input {...props.input} />
+      <input {...props.input} ref={ref} />
     </div>
   );
-};
+});
+
 
 Input.propTypes = {
   id: PropTypes.string,
@@ -16,4 +19,5 @@ Input.propTypes = {
   input: PropTypes.object,
 };
 
+Input.displayName = "Input";
 export default Input;

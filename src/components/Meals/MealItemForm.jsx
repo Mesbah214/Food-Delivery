@@ -1,11 +1,33 @@
+import { useRef, useState } from "react";
+
 import Input from "../UI/Input";
 import PropTypes from "prop-types";
 import classes from "./MealItemForm.module.css";
 
 const MealItemForm = (props) => {
+  const [amountIsValid, setAmountIsValid] = useState(true);
+  const amountRef = useRef();
+
+  const inputSubmitHandler = (e) => {
+    e.preventDefault();
+    const enteredAmount = amountRef.current.value;
+
+    if (
+      enteredAmount.trim().length === 0 ||
+      +enteredAmount < 1 ||
+      +enteredAmount > 5
+    ) {
+      setAmountIsValid(false);
+      return;
+    }
+
+    props.onAddItem(+enteredAmount);
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={inputSubmitHandler}>
       <Input
+        ref={amountRef}
         label="Amount"
         input={{
           id: "amount",
@@ -17,10 +39,13 @@ const MealItemForm = (props) => {
         }}
       />
       <button>+ Add</button>
+      {!amountIsValid && <p>Please enter a valid amount(1-5)</p>}
     </form>
   );
 };
 
-MealItemForm.propTypes = {};
+MealItemForm.propTypes = {
+  onAddItem: PropTypes.func,
+};
 
 export default MealItemForm;
